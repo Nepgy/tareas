@@ -35,8 +35,8 @@ object huevoMixto {
 
 object conejoChocolate {
 	var peso
-	method cuantopesa (x){
-		peso = x
+	method cuantopesa (){
+		return peso
 	}
 	method calorias(){
 		return peso*10
