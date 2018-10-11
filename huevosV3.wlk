@@ -1,5 +1,5 @@
 object huevoRepostero {
-	method calorias(){
+	method cuantasCalorias(){
 		return 750
 	}
 	
@@ -35,10 +35,10 @@ object huevoMixto {
 
 object conejoChocolate {
 	var peso = 10
-	method cuantopesa (x){
+	method cuantoPesa (x){
 		peso = x
 	}
-	method calorias(){
+	method cuantasCalorias(){
 		return peso*10
 	}	
 	method tieneChocolateBlanco(){
@@ -52,14 +52,14 @@ object conejoChocolate {
 	}
 }
 
-object huevitoenBlister{
+object huevitoEnBlister{
 		var huevitos = 0
 
 	method huevitos(x){
 		huevitos = x
 	}
 	
-	method calorias(){
+	method cuantasCalorias(){
 		return huevitos*100 + huevitos.div(5)*150 
 	}
 	
@@ -77,21 +77,21 @@ object huevitoenBlister{
 
 object matrioshka {
 	const base = 3000
-	var huevoSorpr = huevoMixto  
+	var huevoSorpresa = huevoMixto  
 	var decoracion = flor
 	
 	method decoracion (deco){
 		decoracion = deco
 	}
 	method caloriasHuevoSorpr (huevo){
-		huevoSorpr = huevo
+		huevoSorpresa = huevo
 	}
 	method calorias(){
-		return base + huevoSorpr.calorias() + decoracion.calorias()
+		return base + huevoSorpr.cuantasCalorias() + decoracion.cuantasCalorias()
 	}
 	
 	method tieneChocolateBlanco(){
-		return huevoSorpr.tieneChocolateBlanco()
+		return huevoSorpresa.tieneChocolateBlanco()
 	}
 	
 	method tieneChocolateAmargo(){
@@ -105,7 +105,7 @@ object matrioshka {
 object flor {
 	var petalos = 10
 			
-	method calorias(){
+	method cuantasCalorias(){
 		return petalos * 100
 	}
 	method petalos(cantidad) {
@@ -114,30 +114,30 @@ object flor {
 }
 
 object arbol {
-	method calorias(){
+	method cuantasCalorias(){
 		return 150
 	}	 
 }
 
 object ana {
 	var total = 0
-	var huevineos = [] 	
+	var huevos = [] 	
 
 	method leGusta(huevos) {
 		return not huevos.tieneChocolateAmargo() 
 	}
 	
 	method comer(huevos){
-		huevineos.add(huevos)
+		huevos.add(huevos)
 		total += huevos.calorias()
 	}
 	
-	method meEnferma(huevos){
+	method meHaceMal(huevos){
 		return total > 5000 or self.comioChocolateBlanco() 
 	}
  	
 	method comioChocolateBlanco() {
-		return huevineos.any({huevo=>huevo.tieneChocolateBlanco()})
+		return huevos.any({huevo=>huevo.tieneChocolateBlanco()})
 	}
 }	
 
@@ -145,16 +145,16 @@ object ana {
 object jose {
 	var ultimoHuevo
 	
-	method leGusta(huevos) { 
-		return huevos.tieneChocolateBlanco() and huevos.calorias() < 400
+	
 	}
-	method meEnferma(huevos){
+	method meHaceMal(huevos){
 		return ultimoHuevo.tieneChocolateAmargo() 
 	}
 	method comer(huevo){
 		ultimoHuevo = huevo
 	}
-	
+	method leGusta(huevos) { 
+		return huevos.tieneChocolateBlanco() and huevos.calorias() < 400
 
 }
 
@@ -164,7 +164,7 @@ object tito{
 		return true
 	}
 	
-	method meEnferma(huevos){
+	method meHaceMal(huevos){
 		return false
 	}
 	
@@ -173,26 +173,26 @@ object tito{
 
 object juego{
 	
-	var cazaditos = []
+	var cazeria = []
 		
 	method agregar(huevos){
-		cazaditos.addAll(huevos)
+		cazeria.addAll(huevos)
 	}	
 	
 	method cuantoFalta(){
-		return cazaditos.size()
+		return cazeria.size()
 	}
 	
 	method encontrarHuevos(nene,huevo){
 		nene.comer(huevo)
-		cazaditos.remove(huevo)
+		cazeria.remove(huevo)
 	}
 	
 	method encontrarPrimerHuevo(chico){
-		self.encontrarHuevos(chico, cazaditos.first())
+		self.encontrarHuevos(chico, cazeria.first())
 	}
 	
 	method HuevosRestantes(chico){
-		cazaditos.forEach({huevo => self.encontrarHuevos(chico,huevo)})
+		cazeria.forEach({huevo => self.encontrarHuevos(chico,huevo)})
 	}
 }
